@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: STD21014API
-  description: 'Global description of my API'
+  description: 'Hello world'
   version: 1.0.0
 servers:
   - url: https://STD21014.com
@@ -44,6 +44,50 @@ paths:
       responses:
         200:
           description: List of students
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        400:
+          description: Bad request
+    put:
+      tags:
+        - Students
+      operationId: changeAllStudents
+      summary : Create new Student
+      description: Create new Student
+      requestBody:
+        description: student to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudent'
+        required: true
+      responses:
+        200:
+          description: New List of Student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        400:
+          description: Bad request
+    patch:
+      tags:
+        - Students
+      operationId: changeSpecificStudent
+      summary : Create new version of Students
+      description: Create new version of Students
+      requestBody:
+        description: students to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudent'
+        required: true
+      responses:
+        200:
+          description: New List of Students
           content:
             application/json:
               schema:
@@ -131,6 +175,50 @@ paths:
       responses:
         200:
           description: List of Courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Courses'
+        400:
+          description: Bad request
+    put:
+      tags:
+        - Courses
+      operationId: changeAllCourse
+      summary : Create new Course
+      description: Create new course
+      requestBody:
+        description: courses to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourse'
+        required: true
+      responses:
+        200:
+          description: New List of Courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Courses'
+        400:
+          description: Bad request
+    patch:
+      tags:
+        - Courses
+      operationId: changeSpecificCourse
+      summary : Create new version of Course
+      description: Create new version of course
+      requestBody:
+        description: courses to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourse'
+        required: true
+      responses:
+        200:
+          description: New List of Courses
           content:
             application/json:
               schema:
