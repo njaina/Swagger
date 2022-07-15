@@ -1,0 +1,239 @@
+openapi: 3.0.1
+info:
+  title: STD21014API
+  description: 'Global description of my API'
+  version: 1.0.0
+servers:
+  - url: https://STD21014.com
+tags:
+  - name: Students
+
+  - name: Courses
+paths:
+  /students:
+    get:
+      tags:
+        - Students
+      operationId: getStudents
+      summary: Get all students
+      description: Get all students with details
+      responses:
+        200:
+          description: List of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        400:
+          description: Bad request
+    post:
+      tags:
+        - Students
+      operationId: createStudent
+      summary : Create new student
+      description: Create new student
+      requestBody:
+        description: Student to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudent'
+        required: true
+      responses:
+        200:
+          description: List of students
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        400:
+          description: Bad request
+
+  /students/{id}:
+    get:
+      tags:
+        - Students
+      operationId: getStudentId
+      summary: Get specified students
+      description: Get all specified student with details
+      parameters:
+        - name: id
+          in: path
+          schema :
+            type : integer
+          required : true
+      responses:
+        200:
+          description: List of students
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        400:
+          description: Bad request
+
+    delete:
+      tags:
+        - Students
+      summary : Delete specified student
+      description : Delete all or one student
+      parameters:
+        - name : id
+          in: path
+          schema :
+            type : integer
+          required: true
+      responses:
+        200:
+          description: Resources deleted
+        400:
+          description: Bad request
+
+  /courses:
+    get:
+      tags:
+        - Courses
+      operationId: getCourses
+      summary: Get all courses
+      description: Get all courses with details
+      parameters:
+        - name: id
+          in: query
+          schema :
+            type : integer
+          required : true
+      responses:
+        200:
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Courses'
+        400:
+          description: Bad request
+    post:
+      tags:
+        - Courses
+      operationId: createCourse
+      summary : Create new Course
+      description: Create new course
+      requestBody:
+        description: courses to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourse'
+        required: true
+      responses:
+        200:
+          description: List of Courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Courses'
+        400:
+          description: Bad request
+  /courses/{id}:
+    get:
+      tags:
+        - Courses
+      operationId: getCourseId
+      summary: Get specified Courses
+      description: Get all Courses with details
+      parameters:
+        - name: id
+          in: path
+          schema :
+            type : integer
+          required : true
+      responses:
+        200:
+          description: List of Courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Courses'
+        400:
+          description: Bad request
+
+    delete:
+      tags:
+        - Courses
+      summary : Delete specified course
+      description : Delete all or one courses
+      parameters:
+        - name : id
+          in: path
+          schema :
+            type : integer
+          required: true
+      responses:
+        200:
+          description: Resources deleted
+        400:
+          description: Bad request
+
+components:
+  schemas:
+    CreateStudent:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Rakoto"
+        birth_date:
+          type: string
+          format: date
+          example: "2022-01-01"
+    Student:
+      allOf:
+        - $ref: '#/components/schemas/CreateStudent'
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+    CreateCourse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example : 1
+        code :
+          type: string
+          example: "EL1"
+        name :
+          type: string
+          example: "api"
+        Teacher :
+          type : string
+          example : "Harry"
+        createdDate :
+          type: string
+          example : "2022-01-01"
+    Courses :
+      allOf:
+        - $ref: '#/components/schemas/CreateCourse'
+      type: object
+      properties:
+        id:
+          type: integer
+          example : 1
+        code :
+          type: string
+          example: "EL1"
+        name :
+          type: string
+          example: "aPI"
+        Teacher :
+          type : string
+          example : "Harry"
+        createdDate :
+          type: string
+          example : "2022-01-01"
+
+               
