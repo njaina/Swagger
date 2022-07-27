@@ -495,5 +495,3 @@ components:
           type: string
           example: 
             name: ["action","comédie","romance",...]
-        
-         
